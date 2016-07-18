@@ -144,7 +144,7 @@ class DelugePluginTest(DbTestCase):
         torrent = b'!torrent.content'
         self.assertTrue(plugin.add_torrent(torrent))
 
-        rpc_client.call.assert_called_once_with('core.add_torrent_file', None, base64.encodestring(torrent), None)
+        rpc_client.call.assert_called_once_with('core.add_torrent_file', None, base64.encodebytes(torrent), None)
 
     @patch('monitorrent.plugins.clients.deluge.DelugeRPCClient')
     def test_add_torrent_without_credentials(self, deluge_client):
@@ -173,7 +173,7 @@ class DelugePluginTest(DbTestCase):
         torrent = b'!torrent.content'
         self.assertFalse(plugin.add_torrent(torrent))
 
-        rpc_client.call.assert_called_once_with('core.add_torrent_file', None, base64.encodestring(torrent), None)
+        rpc_client.call.assert_called_once_with('core.add_torrent_file', None, base64.encodebytes(torrent), None)
 
     @patch('monitorrent.plugins.clients.deluge.DelugeRPCClient')
     def test_remove_torrent(self, deluge_client):
