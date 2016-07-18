@@ -42,9 +42,9 @@ class UnionpeerTrackerTest(TestCase):
     def test_parse_url(self):
         url = "http://unionpeer.org/topic/1177708-zvezdnie-voyni-voyni-klonov-star-wars-the-clone-wars.html"
         result = self.tracker.parse_url(url)
-        name = u'Звёздные Войны: Войны Клонов (Сезон 4, DVD) / Star Wars: The Clone Wars / Сезон: 4 / ' \
-               u'Серии: 8 из 22 (Дэйв Филони | Dave Filoni) [2011, Анимация, фантасткика, боевик, DVD5 (Custom)] Dub ' \
-               u'+ Rus Sub'
+        name = 'Звёздные Войны: Войны Клонов (Сезон 4, DVD) / Star Wars: The Clone Wars / Сезон: 4 / ' \
+               'Серии: 8 из 22 (Дэйв Филони | Dave Filoni) [2011, Анимация, фантасткика, боевик, DVD5 (Custom)] Dub ' \
+               '+ Rus Sub'
         self.assertEqual(result["original_name"], name)
 
     @use_vcr

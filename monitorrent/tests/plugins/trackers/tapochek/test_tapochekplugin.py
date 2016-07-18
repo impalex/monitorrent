@@ -34,8 +34,8 @@ class TapochekPluginTest(DbTestCase):
     def test_parse_url(self):
         parsed_url = self.plugin.parse_url("http://tapochek.net/viewtopic.php?t=140574")
         self.assertEqual(
-            parsed_url['original_name'], u'Железный человек 3 / Iron man 3 (Шейн Блэк) '
-                                         u'[2013 г., фантастика, боевик, приключения, BDRemux 1080p]')
+            parsed_url['original_name'], 'Железный человек 3 / Iron man 3 (Шейн Блэк) '
+                                         '[2013 г., фантастика, боевик, приключения, BDRemux 1080p]')
 
     @use_vcr
     def test_login_verify(self):

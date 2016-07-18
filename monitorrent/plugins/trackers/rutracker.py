@@ -46,8 +46,8 @@ class RutrackerTracker(object):
     tracker_settings = None
     login_url = "http://rutracker.org/forum/login.php"
     profile_page = "http://rutracker.org/forum/profile.php?mode=viewprofile&u={}"
-    _regex = re.compile(u'^http://w*\.*rutracker.org/forum/viewtopic.php\?t=(\d+)(/.*)?$')
-    uid_regex = re.compile(u'\d*-(\d*)-.*')
+    _regex = re.compile('^http://w*\.*rutracker.org/forum/viewtopic.php\?t=(\d+)(/.*)?$')
+    uid_regex = re.compile('\d*-(\d*)-.*')
 
     def __init__(self, uid=None, bb_data=None):
         self.uid = uid
@@ -79,7 +79,7 @@ class RutrackerTracker(object):
 
     def login(self, username, password):
         s = Session()
-        data = {"login_username": username, "login_password": password, 'login': u'%E2%F5%EE%E4'}
+        data = {"login_username": username, "login_password": password, 'login': '%E2%F5%EE%E4'}
         login_result = s.post(self.login_url, data, timeout=self.tracker_settings.requests_timeout)
         if login_result.url.startswith(self.login_url):
             # TODO get error info (although it shouldn't contain anything useful

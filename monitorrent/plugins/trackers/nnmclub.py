@@ -48,10 +48,10 @@ class NnmClubLoginFailedException(Exception):
 
 class NnmClubTracker(object):
     tracker_settings = None
-    tracker_domains = [u'nnmclub.to', u'nnm-club.me']
-    title_headers = [u'torrent :: nnm-club']
-    _login_url = u'http://nnm-club.me/forum/login.php'
-    _profile_page = u"http://nnmclub.to/forum/profile.php?mode=viewprofile&u={}"
+    tracker_domains = ['nnmclub.to', 'nnm-club.me']
+    title_headers = ['torrent :: nnm-club']
+    _login_url = 'http://nnm-club.me/forum/login.php'
+    _profile_page = "http://nnmclub.to/forum/profile.php?mode=viewprofile&u={}"
 
     def __init__(self, user_id=None, sid=None):
         self.user_id = user_id
@@ -93,10 +93,10 @@ class NnmClubTracker(object):
             # TODO get error info (although it shouldn't contain anything useful
             raise NnmClubLoginFailedException(1, "Invalid login or password")
         else:
-            sid = s.cookies[u'phpbb2mysql_4_sid']
-            data = s.cookies[u'phpbb2mysql_4_data']
+            sid = s.cookies['phpbb2mysql_4_sid']
+            data = s.cookies['phpbb2mysql_4_data']
             parsed_data = loads(unquote(data).encode('utf-8'))
-            self.user_id = parsed_data[u'userid'.encode('utf-8')].decode('utf-8')
+            self.user_id = parsed_data['userid'.encode('utf-8')].decode('utf-8')
             self.sid = sid
 
     def verify(self):

@@ -38,13 +38,13 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
     @use_vcr()
     def test_prepare_add_topic(self):
         settings = self.plugin.prepare_add_topic('http://www.lostfilm.tv/browse.php?cat=236')
-        self.assertEqual(u'12 обезьян / 12 Monkeys', settings['display_name'])
-        self.assertEqual(u'SD', settings['quality'])
+        self.assertEqual('12 обезьян / 12 Monkeys', settings['display_name'])
+        self.assertEqual('SD', settings['quality'])
 
     @use_vcr()
     def test_add_topic(self):
         params = {
-            'display_name': u'12 обезьян / 12 Monkeys',
+            'display_name': '12 обезьян / 12 Monkeys',
             'quality': '720p'
         }
         self.assertTrue(self.plugin.add_topic('http://www.lostfilm.tv/browse.php?cat=236', params))
@@ -149,7 +149,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
     def test_prepare_add_topic_success(self):
         result = self.plugin.prepare_add_topic('http://www.lostfilm.tv/browse.php?cat=236')
 
-        self.assertEqual({'display_name': u'12 обезьян / 12 Monkeys', 'quality': 'SD'}, result)
+        self.assertEqual({'display_name': '12 обезьян / 12 Monkeys', 'quality': 'SD'}, result)
 
     @data('SD', '720p', '1080p')
     @use_vcr
@@ -158,7 +158,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
             {'username': 'monitorrent', 'password': 'monitorrent', 'default_quality': quality})
         result = self.plugin.prepare_add_topic('http://www.lostfilm.tv/browse.php?cat=236')
 
-        self.assertEqual({'display_name': u'12 обезьян / 12 Monkeys', 'quality': quality}, result)
+        self.assertEqual({'display_name': '12 обезьян / 12 Monkeys', 'quality': quality}, result)
 
     @use_vcr
     def test_prepare_add_topic_fail(self):
@@ -180,11 +180,11 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
                                body=self.read_httpretty_content('nrd.php_c=245&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://retre.org/?c=245&s=1&e=09') +
-                                                         u"&u=\d+&h=[a-z0-9]+"),
+                                                         "&u=\d+&h=[a-z0-9]+"),
                                body=self.read_httpretty_content('reTre.org_c=245&s=1&e=09.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://retre.org/?c=245&s=1&e=10') +
-                                                         u"&u=\d+&h=[a-z0-9]+"),
+                                                         "&u=\d+&h=[a-z0-9]+"),
                                body=self.read_httpretty_content('reTre.org_c=245&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
 
@@ -196,7 +196,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
                                body=self.read_httpretty_content('nrd.php_c=251&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://retre.org/?c=251&s=1&e=10') +
-                                                         u"&u=\d+&h=[a-z0-9]+"),
+                                                         "&u=\d+&h=[a-z0-9]+"),
                                body=self.read_httpretty_content('reTre.org_c=251&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
 
@@ -207,9 +207,9 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
         self.plugin.tracker.setup(helper.real_uid, helper.real_pass, helper.real_usess)
         (self.plugin)._execute_login = Mock(return_value=True)
 
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", u'Мистер Робот / Mr. Robot',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", 'Мистер Робот / Mr. Robot',
                         'Mr. Robot', '720p', 1, 8)
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=251", u'Крик / Scream',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=251", 'Крик / Scream',
                         'Scream', '720p', 1, 9)
 
         # noinspection PyTypeChecker
@@ -242,11 +242,11 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
                                body=self.read_httpretty_content('nrd.php_c=245&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://retre.org/?c=245&s=1&e=09') +
-                                                         u"&u=\d+&h=[a-z0-9]+"),
+                                                         "&u=\d+&h=[a-z0-9]+"),
                                body=self.read_httpretty_content('reTre.org_c=245&s=1&e=09.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://retre.org/?c=245&s=1&e=10') +
-                                                         u"&u=\d+&h=[a-z0-9]+"),
+                                                         "&u=\d+&h=[a-z0-9]+"),
                                body=self.read_httpretty_content('reTre.org_c=245&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
 
@@ -258,7 +258,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
                                body=self.read_httpretty_content('nrd.php_c=251&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://retre.org/?c=251&s=1&e=10') +
-                                                         u"&u=\d+&h=[a-z0-9]+"),
+                                                         "&u=\d+&h=[a-z0-9]+"),
                                body=self.read_httpretty_content('reTre.org_c=251&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
 
@@ -275,9 +275,9 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
         self.plugin.tracker.setup(helper.real_uid, helper.real_pass, helper.real_usess)
         self.plugin._execute_login = Mock(return_value=True)
 
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", u'Мистер Робот / Mr. Robot',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", 'Мистер Робот / Mr. Robot',
                         'Mr. Robot', '720p', 1, 8)
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=251", u'Крик / Scream',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=251", 'Крик / Scream',
                         'Scream', '720p', 1, 9)
 
         # noinspection PyTypeChecker
@@ -301,7 +301,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
         self.plugin.tracker.setup(helper.real_uid, helper.real_pass, helper.real_usess)
         self.plugin._execute_login = Mock(return_value=True)
 
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", u'Мистер Робот / Mr. Robot',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", 'Мистер Робот / Mr. Robot',
                         'Mr. Robot', '720p', 1, 8)
 
         # noinspection PyTypeChecker
@@ -325,9 +325,9 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
         self.plugin.tracker.setup(helper.real_uid, helper.real_pass, helper.real_usess)
         self.plugin._execute_login = Mock(return_value=True)
 
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", u'Мистер Робот / Mr. Robot',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", 'Мистер Робот / Mr. Robot',
                         'Mr. Robot', '720p', 1, 10)
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=251", u'Крик / Scream',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=251", 'Крик / Scream',
                         'Scream', '720p', 1, 10)
 
         # noinspection PyTypeChecker
@@ -354,14 +354,14 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
                                body=self.read_httpretty_content('nrd.php_c=58&s=1&e=13.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://retre.org/?c=58&s=1&e=13') +
-                                                         u"&u=\d+&h=[a-z0-9]+"),
+                                                         "&u=\d+&h=[a-z0-9]+"),
                                body=self.read_httpretty_content('reTre.org_c=58&s=1&e=13.html', encoding='utf-8'),
                                match_querystring=True)
 
         self.plugin.tracker.setup(helper.real_uid, helper.real_pass, helper.real_usess)
         self.plugin._execute_login = Mock(return_value=True)
 
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=58", u'Святой Дозо / Miracles',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=58", 'Святой Дозо / Miracles',
                         'Miracles', '720p', 1, 12)
 
         # noinspection PyTypeChecker
@@ -386,7 +386,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
         self.plugin.tracker.setup(helper.real_uid, helper.real_pass, helper.real_usess)
         self.plugin._execute_login = Mock(return_value=True)
 
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=131", u'Подпольная Империя / Broadwalk Empire',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=131", 'Подпольная Империя / Broadwalk Empire',
                         'Broadwalk Empire', '720p', 1, 12)
 
         # noinspection PyTypeChecker
@@ -411,7 +411,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
         self.plugin.tracker.setup(helper.real_uid, helper.real_pass, helper.real_usess)
         self.plugin._execute_login = Mock(return_value=True)
 
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=131", u'Подпольная Империя / Broadwalk Empire',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=131", 'Подпольная Империя / Broadwalk Empire',
                         'Broadwalk Empire', '720p', 1, 12)
 
         # noinspection PyTypeChecker
@@ -434,7 +434,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
         self.plugin.tracker.setup(helper.real_uid, helper.real_pass, helper.real_usess)
         self.plugin._execute_login = Mock(return_value=True)
 
-        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", u'Мистер Робот / Mr. Robot',
+        self._add_topic("http://www.lostfilm.tv/browse.php?cat=245", 'Мистер Робот / Mr. Robot',
                         'Mr. Robot', '720p')
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://www.lostfilm.tv/browse.php?cat=245')),
                                body=self.read_httpretty_content('browse.php_cat-245(Mr. Robot).html', encoding='utf-8'),
@@ -443,7 +443,7 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
                                body=self.read_httpretty_content('nrd.php_c=245&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, re.compile(re.escape('http://retre.org/?c=245&s=1&e=10') +
-                                                         u"&u=\d+&h=[a-z0-9]+"),
+                                                         "&u=\d+&h=[a-z0-9]+"),
                                body=self.read_httpretty_content('reTre.org_c=245&s=1&e=10.html', encoding='utf-8'),
                                match_querystring=True)
         httpretty.register_uri(httpretty.GET, 'http://tracktor.in/td.php', body=torrent_body,
@@ -479,8 +479,8 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
         info = self.plugin.get_topic_info(topic)
         self.assertEqual(info, expected)
 
-    @data(({'name': u'Русский', 'original_name': 'Russian'}, u'Русский / Russian'),
-          ({'original_name': u'Not Parsed'}, u'Not Parsed'))
+    @data(({'name': 'Русский', 'original_name': 'Russian'}, 'Русский / Russian'),
+          ({'original_name': 'Not Parsed'}, 'Not Parsed'))
     @unpack
     def test_get_display_name(self, parsed_url, expected):
         # noinspection PyProtectedMember
@@ -496,8 +496,8 @@ class LostFilmTrackerPluginTest(ReadContentMixin, DbTestCase):
     def test_parse_url(self):
         result = self.plugin.parse_url("http://www.lostfilm.tv/browse.php?cat=130")
         self.assertIsNotNone(result)
-        self.assertEqual(result['name'], u'Шерлок')
-        self.assertEqual(result['original_name'], u'Sherlock')
+        self.assertEqual(result['name'], 'Шерлок')
+        self.assertEqual(result['original_name'], 'Sherlock')
 
     def _add_topic(self, url, display_name, search_name, quality, season=None, episode=None):
         with DBSession() as db:

@@ -13,7 +13,7 @@ from monitorrent.tests import RestTestBase
 
 @ddt
 class TestStaticFiles(RestTestBase):
-    @data(u'<HTML></HTML>', u'<HTML>Other text</HTML>')
+    @data('<HTML></HTML>', '<HTML>Other text</HTML>')
     def test_static_index(self, index_text):
         # with not ascii chars in index_text test fails on travis-ci
         stat_class = namedtuple('stat_class', ['st_mtime'])
@@ -38,7 +38,7 @@ class TestStaticFiles(RestTestBase):
             self.assertEqual(str(next(body)), index_text)
 
     def test_static_index_if_modified_since(self):
-        index_text = u'<HTML></HTML>'
+        index_text = '<HTML></HTML>'
         # with not ascii chars in index_text test fails on travis-ci
         stat_class = namedtuple('stat_class', ['st_mtime'])
         time_time = 1105022732.0
@@ -61,7 +61,7 @@ class TestStaticFiles(RestTestBase):
             self.assertEqual('1105022732.0', self.srmock.headers_dict['etag'])
 
     def test_static_index_if_none_match(self):
-        index_text = u'<HTML></HTML>'
+        index_text = '<HTML></HTML>'
         # with not ascii chars in index_text test fails on travis-ci
         stat_class = namedtuple('stat_class', ['st_mtime'])
         time_time = 1105022732.0

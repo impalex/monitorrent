@@ -157,11 +157,11 @@ class TrackersManager(object):
             try:
                 topics = tracker.get_topics(ids)
                 if len(topics) > 0:
-                    engine.log.info(u"Start checking for <b>{}</b>".format(name))
+                    engine.log.info("Start checking for <b>{}</b>".format(name))
                     tracker.execute(topics, engine)
-                    engine.log.info(u"End checking for <b>{}</b>".format(name))
+                    engine.log.info("End checking for <b>{}</b>".format(name))
             except Exception as e:
-                engine.log.failed(u"Failed while checking for <b>{0}</b>.\nReason: {1}"
+                engine.log.failed("Failed while checking for <b>{0}</b>.\nReason: {1}"
                                   .format(name, cgi.escape(str(e))))
 
 

@@ -40,8 +40,8 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
         with self.assertRaises(LostFilmTVLoginFailedException) as cm:
             self.tracker.login("admin", "FAKE_PASSWORD")
         self.assertEqual(cm.exception.code, 6)
-        self.assertEqual(cm.exception.text, u'incorrect login/password')
-        self.assertEqual(cm.exception.message, u'Не удалось войти. Возможно не правильный логин/пароль')
+        self.assertEqual(cm.exception.text, 'incorrect login/password')
+        self.assertEqual(cm.exception.message, 'Не удалось войти. Возможно не правильный логин/пароль')
 
     @helper.use_vcr()
     def test_verify(self):
@@ -59,13 +59,13 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
         self.assertFalse(tracker.verify())
 
     def test_parse_correct_title(self):
-        title = LostFilmTVTracker._parse_title(u'Род человеческий (Extant)')
-        self.assertEqual(u'Род человеческий', title['name'])
-        self.assertEqual(u'Extant', title['original_name'])
+        title = LostFilmTVTracker._parse_title('Род человеческий (Extant)')
+        self.assertEqual('Род человеческий', title['name'])
+        self.assertEqual('Extant', title['original_name'])
 
     def test_parse_correct_title_strange(self):
-        title = LostFilmTVTracker._parse_title(u'Род человеческий')
-        self.assertEqual(u'Род человеческий', title['original_name'])
+        title = LostFilmTVTracker._parse_title('Род человеческий')
+        self.assertEqual('Род человеческий', title['original_name'])
 
     @data(('http://www.lostfilm.tv/browse.php?cat=236', True),
           ('http://www.lostfilm.tv/my.php', False))
@@ -76,20 +76,20 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
     @use_vcr()
     def test_parse_correct_url(self):
         title = self.tracker.parse_url('http://www.lostfilm.tv/browse.php?cat=236')
-        self.assertEqual(u'12 обезьян', title['name'])
-        self.assertEqual(u'12 Monkeys', title['original_name'])
+        self.assertEqual('12 обезьян', title['name'])
+        self.assertEqual('12 Monkeys', title['original_name'])
 
     @use_vcr()
     def test_parse_correct_url_issue_22_1(self):
         title = self.tracker.parse_url('http://www.lostfilm.tv/browse.php?cat=114')
-        self.assertEqual(u'Дневники вампира', title['name'])
-        self.assertEqual(u'The Vampire Diaries', title['original_name'])
+        self.assertEqual('Дневники вампира', title['name'])
+        self.assertEqual('The Vampire Diaries', title['original_name'])
 
     @use_vcr()
     def test_parse_correct_url_issue_22_2(self):
         title = self.tracker.parse_url('http://www.lostfilm.tv/browse.php?cat=160')
-        self.assertEqual(u'Гримм', title['name'])
-        self.assertEqual(u'Grimm', title['original_name'])
+        self.assertEqual('Гримм', title['name'])
+        self.assertEqual('Grimm', title['original_name'])
 
     @use_vcr()
     def test_parse_incorrect_url_1(self):
@@ -108,8 +108,8 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
         url = 'http://www.lostfilm.tv/browse.php?cat=160'
         parsed_url = self.tracker.parse_url(url, True)
         self.assertEqual(160, parsed_url['cat'])
-        self.assertEqual(u'Гримм', parsed_url['name'])
-        self.assertEqual(u'Grimm', parsed_url['original_name'])
+        self.assertEqual('Гримм', parsed_url['name'])
+        self.assertEqual('Grimm', parsed_url['original_name'])
         self.assertEqual(88, len(parsed_url['episodes']))
         self.assertEqual(4, len(parsed_url['complete_seasons']))
 
@@ -118,8 +118,8 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
         url = 'http://www.lostfilm.tv/browse.php?cat=129'
         parsed_url = self.tracker.parse_url(url, True)
         self.assertEqual(129, parsed_url['cat'])
-        self.assertEqual(u'Касл', parsed_url['name'])
-        self.assertEqual(u'Castle', parsed_url['original_name'])
+        self.assertEqual('Касл', parsed_url['name'])
+        self.assertEqual('Castle', parsed_url['original_name'])
         self.assertEqual(119, len(parsed_url['episodes']))
         self.assertEqual(7, len(parsed_url['complete_seasons']))
 
@@ -128,8 +128,8 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
         url = 'http://www.lostfilm.tv/browse.php?cat=134'
         parsed_url = self.tracker.parse_url(url, True)
         self.assertEqual(134, parsed_url['cat'])
-        self.assertEqual(u'Ходячие мертвецы', parsed_url['name'])
-        self.assertEqual(u'The Walking Dead', parsed_url['original_name'])
+        self.assertEqual('Ходячие мертвецы', parsed_url['name'])
+        self.assertEqual('The Walking Dead', parsed_url['original_name'])
         self.assertEqual(67, len(parsed_url['episodes']))
         self.assertEqual(5, len(parsed_url['complete_seasons']))
 
@@ -138,8 +138,8 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
         url = 'http://www.lostfilm.tv/browse.php?cat=247'
         parsed_url = self.tracker.parse_url(url, True)
         self.assertEqual(247, parsed_url['cat'])
-        self.assertEqual(u'Люди', parsed_url['name'])
-        self.assertEqual(u'Humans', parsed_url['original_name'])
+        self.assertEqual('Люди', parsed_url['name'])
+        self.assertEqual('Humans', parsed_url['original_name'])
         self.assertEqual(8, len(parsed_url['episodes']))
         self.assertEqual(1, len(parsed_url['complete_seasons']))
 
@@ -148,8 +148,8 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
         url = 'http://www.lostfilm.tv/browse.php?cat=186'
         parsed_url = self.tracker.parse_url(url, True)
         self.assertEqual(186, parsed_url['cat'])
-        self.assertEqual(u'Под куполом', parsed_url['name'])
-        self.assertEqual(u'Under the Dome', parsed_url['original_name'])
+        self.assertEqual('Под куполом', parsed_url['name'])
+        self.assertEqual('Under the Dome', parsed_url['original_name'])
         self.assertEqual(39, len(parsed_url['episodes']))
         self.assertEqual(2, len(parsed_url['complete_seasons']))
 
@@ -229,105 +229,105 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
         self.assertIsNone(tracker.get_download_info(url, 4, 9))
 
     def test_parse_corrent_rss_title0(self):
-        t1 = u'Мистер Робот (Mr. Robot). уя3вим0сти.wmv (3xpl0its.wmv) [MP4]. (S01E05)'
+        t1 = 'Мистер Робот (Mr. Robot). уя3вим0сти.wmv (3xpl0its.wmv) [MP4]. (S01E05)'
         parsed = LostFilmTVTracker.parse_rss_title(t1)
-        self.assertEqual(u'Мистер Робот', parsed['name'])
-        self.assertEqual(u'Mr. Robot', parsed['original_name'])
-        self.assertEqual(u'уя3вим0сти.wmv', parsed['title'])
-        self.assertEqual(u'3xpl0its.wmv', parsed['original_title'])
-        self.assertEqual(u'720p', parsed['quality'])
-        self.assertEqual(u'S01E05', parsed['episode_info'])
+        self.assertEqual('Мистер Робот', parsed['name'])
+        self.assertEqual('Mr. Robot', parsed['original_name'])
+        self.assertEqual('уя3вим0сти.wmv', parsed['title'])
+        self.assertEqual('3xpl0its.wmv', parsed['original_title'])
+        self.assertEqual('720p', parsed['quality'])
+        self.assertEqual('S01E05', parsed['episode_info'])
         self.assertEqual(1, parsed['season'])
         self.assertEqual(5, parsed['episode'])
 
     def test_parse_corrent_rss_title1(self):
-        t1 = u'Мистер Робот (Mr. Robot). уя3вим0сти.wmv (3xpl0its.wmv). (S01E05)'
+        t1 = 'Мистер Робот (Mr. Robot). уя3вим0сти.wmv (3xpl0its.wmv). (S01E05)'
         parsed = LostFilmTVTracker.parse_rss_title(t1)
-        self.assertEqual(u'Мистер Робот', parsed['name'])
-        self.assertEqual(u'Mr. Robot', parsed['original_name'])
-        self.assertEqual(u'уя3вим0сти.wmv', parsed['title'])
-        self.assertEqual(u'3xpl0its.wmv', parsed['original_title'])
-        self.assertEqual(u'SD', parsed['quality'])
-        self.assertEqual(u'S01E05', parsed['episode_info'])
+        self.assertEqual('Мистер Робот', parsed['name'])
+        self.assertEqual('Mr. Robot', parsed['original_name'])
+        self.assertEqual('уя3вим0сти.wmv', parsed['title'])
+        self.assertEqual('3xpl0its.wmv', parsed['original_title'])
+        self.assertEqual('SD', parsed['quality'])
+        self.assertEqual('S01E05', parsed['episode_info'])
         self.assertEqual(1, parsed['season'])
         self.assertEqual(5, parsed['episode'])
 
-    @data(u'Мистер Робот (Mr. Robot. уя3вим0сти.wmv (3xpl0its.wmv). (S01E05)',
-          u'Мистер Робот (Mr. Robot). уя3вим0сти.wmv (3xpl0its.wmv). (S01E)')
+    @data('Мистер Робот (Mr. Robot. уя3вим0сти.wmv (3xpl0its.wmv). (S01E05)',
+          'Мистер Робот (Mr. Robot). уя3вим0сти.wmv (3xpl0its.wmv). (S01E)')
     def test_parse_incorrent_rss_title1(self, title):
         self.assertIsNone(LostFilmTVTracker.parse_rss_title(title))
 
     def test_parse_special_rss_title(self):
-        t1 = u'Под куполом (Under the Dome). Идите дальше/А я останусь (Move On/But I\'m Not) [1080p]. (S03E01E02)'
+        t1 = 'Под куполом (Under the Dome). Идите дальше/А я останусь (Move On/But I\'m Not) [1080p]. (S03E01E02)'
         parsed = LostFilmTVTracker.parse_rss_title(t1)
-        self.assertEqual(u'Под куполом', parsed['name'])
-        self.assertEqual(u'Under the Dome', parsed['original_name'])
-        self.assertEqual(u'Идите дальше/А я останусь', parsed['title'])
-        self.assertEqual(u'Move On/But I\'m Not', parsed['original_title'])
-        self.assertEqual(u'1080p', parsed['quality'])
-        self.assertEqual(u'S03E01E02', parsed['episode_info'])
+        self.assertEqual('Под куполом', parsed['name'])
+        self.assertEqual('Under the Dome', parsed['original_name'])
+        self.assertEqual('Идите дальше/А я останусь', parsed['title'])
+        self.assertEqual('Move On/But I\'m Not', parsed['original_title'])
+        self.assertEqual('1080p', parsed['quality'])
+        self.assertEqual('S03E01E02', parsed['episode_info'])
         self.assertEqual(3, parsed['season'])
         self.assertEqual(2, parsed['episode'])
 
     def test_parse_special_rss_title2(self):
-        t1 = u'Люди (Humans). Эпизод 8 [MP4]. (S01E08)'
+        t1 = 'Люди (Humans). Эпизод 8 [MP4]. (S01E08)'
         parsed = LostFilmTVTracker.parse_rss_title(t1)
-        self.assertEqual(u'Люди', parsed['name'])
-        self.assertEqual(u'Humans', parsed['original_name'])
-        self.assertEqual(u'Эпизод 8', parsed['title'])
+        self.assertEqual('Люди', parsed['name'])
+        self.assertEqual('Humans', parsed['original_name'])
+        self.assertEqual('Эпизод 8', parsed['title'])
         self.assertIsNone(parsed['original_title'])
-        self.assertEqual(u'720p', parsed['quality'])
-        self.assertEqual(u'S01E08', parsed['episode_info'])
+        self.assertEqual('720p', parsed['quality'])
+        self.assertEqual('S01E08', parsed['episode_info'])
         self.assertEqual(1, parsed['season'])
         self.assertEqual(8, parsed['episode'])
 
     def test_parse_special_rss_title3(self):
-        t1 = u'Люди (Humans). Эпизод 8. (S01E08)'
+        t1 = 'Люди (Humans). Эпизод 8. (S01E08)'
         parsed = LostFilmTVTracker.parse_rss_title(t1)
-        self.assertEqual(u'Люди', parsed['name'])
-        self.assertEqual(u'Humans', parsed['original_name'])
-        self.assertEqual(u'Эпизод 8', parsed['title'])
+        self.assertEqual('Люди', parsed['name'])
+        self.assertEqual('Humans', parsed['original_name'])
+        self.assertEqual('Эпизод 8', parsed['title'])
         self.assertIsNone(parsed['original_title'])
-        self.assertEqual(u'SD', parsed['quality'])
-        self.assertEqual(u'S01E08', parsed['episode_info'])
+        self.assertEqual('SD', parsed['quality'])
+        self.assertEqual('S01E08', parsed['episode_info'])
         self.assertEqual(1, parsed['season'])
         self.assertEqual(8, parsed['episode'])
 
     def test_parse_special_rss_title4(self):
-        t1 = u'Люди (Humans). Эпизод 8 [WEBRip]. (S01E08)'
+        t1 = 'Люди (Humans). Эпизод 8 [WEBRip]. (S01E08)'
         parsed = LostFilmTVTracker.parse_rss_title(t1)
-        self.assertEqual(u'Люди', parsed['name'])
-        self.assertEqual(u'Humans', parsed['original_name'])
-        self.assertEqual(u'Эпизод 8', parsed['title'])
+        self.assertEqual('Люди', parsed['name'])
+        self.assertEqual('Humans', parsed['original_name'])
+        self.assertEqual('Эпизод 8', parsed['title'])
         self.assertIsNone(parsed['original_title'])
-        self.assertEqual(u'unknown', parsed['quality'])
-        self.assertEqual(u'S01E08', parsed['episode_info'])
+        self.assertEqual('unknown', parsed['quality'])
+        self.assertEqual('S01E08', parsed['episode_info'])
         self.assertEqual(1, parsed['season'])
         self.assertEqual(8, parsed['episode'])
 
     @httpretty.activate
     def test_httpretty_login_success(self):
-        uid = u'151548'
-        pass_ = u'dd770c2445d297ed0aa192c153e5424c'
-        usess = u'e76e71e0f32e65c2470e42016dbb785e'
+        uid = '151548'
+        pass_ = 'dd770c2445d297ed0aa192c153e5424c'
+        usess = 'e76e71e0f32e65c2470e42016dbb785e'
 
         httpretty.HTTPretty.allow_net_connect = False
         httpretty.register_uri(httpretty.POST,
-                               u'https://login1.bogi.ru/login.php?referer=https%3A%2F%2Fwww.lostfilm.tv%2F',
-                               body=self.read_httpretty_content(u'test_lostfilmtracker.1.login1.bogi.ru.html',
+                               'https://login1.bogi.ru/login.php?referer=https%3A%2F%2Fwww.lostfilm.tv%2F',
+                               body=self.read_httpretty_content('test_lostfilmtracker.1.login1.bogi.ru.html',
                                                                 encoding='utf-8'))
 
         # hack for pass multiple cookies
         httpretty.register_uri(httpretty.POST,
-                               u'http://www.lostfilm.tv/blg.php?ref=random',
+                               'http://www.lostfilm.tv/blg.php?ref=random',
                                body='', status=302,
-                               set_cookie=u"uid={0}\r\n"
-                                          u"Set-Cookie: pass={1}".format(uid, pass_),
-                               location=u'/')
-        httpretty.register_uri(httpretty.GET, u'http://www.lostfilm.tv/my.php',
-                               body=u'(usess={})'.format(usess))
+                               set_cookie="uid={0}\r\n"
+                                          "Set-Cookie: pass={1}".format(uid, pass_),
+                               location='/')
+        httpretty.register_uri(httpretty.GET, 'http://www.lostfilm.tv/my.php',
+                               body='(usess={})'.format(usess))
 
-        self.tracker.login(u'fakelogin', u'p@$$w0rd')
+        self.tracker.login('fakelogin', 'p@$$w0rd')
 
         self.assertEqual(self.tracker.c_uid, uid)
         self.assertEqual(self.tracker.c_pass, pass_)
@@ -337,17 +337,17 @@ class LostFilmTrackerTest(ReadContentMixin, TestCase):
     def test_httpretty_unknown_login_failed(self):
         httpretty.HTTPretty.allow_net_connect = False
         httpretty.register_uri(httpretty.POST,
-                               u'https://login1.bogi.ru/login.php?referer=https%3A%2F%2Fwww.lostfilm.tv%2F',
-                               body=self.read_httpretty_content(u'test_lostfilmtracker.1.login1.bogi.ru.html',
+                               'https://login1.bogi.ru/login.php?referer=https%3A%2F%2Fwww.lostfilm.tv%2F',
+                               body=self.read_httpretty_content('test_lostfilmtracker.1.login1.bogi.ru.html',
                                                                 encoding='utf-8'))
 
         # hack for pass multiple cookies
         httpretty.register_uri(httpretty.POST,
-                               u'http://www.lostfilm.tv/blg.php?ref=random',
-                               body=u'Internal server error', status=500)
+                               'http://www.lostfilm.tv/blg.php?ref=random',
+                               body='Internal server error', status=500)
 
         with self.assertRaises(LostFilmTVLoginFailedException) as cm:
-            self.tracker.login(u'fakelogin', u'p@$$w0rd')
+            self.tracker.login('fakelogin', 'p@$$w0rd')
         self.assertEqual(cm.exception.code, -2)
         self.assertIsNone(cm.exception.text)
         self.assertIsNone(cm.exception.message)

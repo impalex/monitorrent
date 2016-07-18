@@ -248,7 +248,7 @@ class Torrent(object):
                         item[field] = item[field].decode(self.content.get('encoding', 'cp1252'))
                     except UnicodeError:
                         # Broken beyond anything reasonable
-                        fallback = item[field].decode('utf-8', 'replace').replace(u'\ufffd', '_')
+                        fallback = item[field].decode('utf-8', 'replace').replace('\ufffd', '_')
                         log.warning('%s=%r field in torrent %r is wrongly encoded, falling back to `%s`' %
                                     (field, item[field], self.content['info']['name'], fallback))
                         item[field] = fallback

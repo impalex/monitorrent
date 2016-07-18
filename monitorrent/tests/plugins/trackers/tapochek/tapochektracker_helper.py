@@ -13,8 +13,8 @@ class TapochekHelper(object):
     fake_login = 'fakelogin'
     fake_password = 'p@$$w0rd'
     fake_uid = '407039'
-    fake_bb_data = u'a%3A3%3A%7Bs%3A2%3A%22uk%22%3BN%3Bs%3A3%3A%22uid%22%' \
-                   u'3Bi%3A407039%3Bs%3A3%3A%22sid%22%3Bs%3A20%3A%22bbGF6KdstmL1onQgnZ0u%22%3B%7D'
+    fake_bb_data = 'a%3A3%3A%7Bs%3A2%3A%22uk%22%3BN%3Bs%3A3%3A%22uid%22%' \
+                   '3Bi%3A407039%3Bs%3A3%3A%22sid%22%3Bs%3A20%3A%22bbGF6KdstmL1onQgnZ0u%22%3B%7D'
 
     def __init__(self, login=None, password=None, uid=None, bb_data=None):
         self.real_login = login or self.fake_login

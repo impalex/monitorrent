@@ -51,12 +51,12 @@ class PushoverNotifierPlugin(NotifierPlugin):
         if not settings or not settings.access_token or not settings.user_id:
             raise PushoverException(1, "Access Token or User Id was not specified")
         parameters = {
-            u'token': settings.access_token,
-            u'title': header,
-            u'message': body,
-            u'url': url,
-            u'user': settings.user_id,
-            u'key': settings.access_token
+            'token': settings.access_token,
+            'title': header,
+            'message': body,
+            'url': url,
+            'user': settings.user_id,
+            'key': settings.access_token
         }
 
         request = requests.post('https://api.pushover.net/1/messages.json', data=parameters)

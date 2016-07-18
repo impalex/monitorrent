@@ -35,7 +35,7 @@ class NnmClubTrackerHelper(object):
     fake_user_id = '9876543'
     fake_sid = '12345678910111213'
     # protected
-    _sid_replace = re.compile(u'sid=[a-z0-9]{32}')
+    _sid_replace = re.compile('sid=[a-z0-9]{32}')
 
     def __init__(self, username=None, password=None, user_id=None, sid=None):
         super(NnmClubTrackerHelper, self).__init__()
@@ -77,7 +77,7 @@ class NnmClubTrackerHelper(object):
         if 'Cookie' in request.headers:
             cookie_string = request.headers['Cookie']
             cookie = http.cookies.SimpleCookie()
-            cookie.load(str(cookie_string))
+            cookie.load(cookie_string.encode('utf-8'))
             cookies = [c.output(header='').strip() for c in list(cookie.values())]
             request.headers['Cookie'] = "; ".join(self._filter_cookies(cookies))
 

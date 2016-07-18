@@ -47,12 +47,12 @@ class PushbulletNotifierPlugin(NotifierPlugin):
         settings = self.get_settings()
         if not settings or not settings.access_token:
             raise PushbulletException(1, "Access Token was not specified")
-        type = u'link' if url else u'note'
+        type = 'link' if url else 'note'
         parameters = {
-            u'type': type,
-            u'title': header,
-            u'body': body,
-            u'url': url
+            'type': type,
+            'title': header,
+            'body': body,
+            'url': url
         }
 
         request = requests.post('https://api.pushbullet.com/v2/pushes', data=parameters,

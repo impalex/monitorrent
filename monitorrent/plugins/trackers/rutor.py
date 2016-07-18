@@ -100,8 +100,8 @@ def upgrade_1_to_2(operations_factory):
 class RutorOrgTracker(object):
     tracker_settings = None
     tracker_domains = ['rutor.info', 'rutor.is']
-    _regex = re.compile(u'^/torrent/(\d+)(/.*)?$')
-    title_headers = ["rutor.info ::", u'зеркало rutor.info :: ']
+    _regex = re.compile('^/torrent/(\d+)(/.*)?$')
+    title_headers = ["rutor.info ::", 'зеркало rutor.info :: ']
 
     def can_parse_url(self, url):
         parsed_url = urlparse(url)

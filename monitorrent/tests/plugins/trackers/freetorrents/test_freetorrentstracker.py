@@ -34,8 +34,8 @@ class FreeTorrentsTrackerTest(TestCase):
     def test_parse_url(self):
         parsed_url = self.tracker.parse_url("http://free-torrents.org/forum/viewtopic.php?t=207456")
         self.assertEqual(
-            parsed_url['original_name'], u'Мистер Робот / Mr. Robot [Сезон 1 (1-9 из 10)]'
-                                         u'[2015, Драма, криминал, WEB-DLRip] [MVO (LostFilm)]')
+            parsed_url['original_name'], 'Мистер Робот / Mr. Robot [Сезон 1 (1-9 из 10)]'
+                                         '[2015, Драма, криминал, WEB-DLRip] [MVO (LostFilm)]')
 
     @use_vcr
     def test_parse_wrong_url(self):

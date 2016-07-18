@@ -57,8 +57,8 @@ class TelegramNotifierPlugin(NotifierPlugin):
         if url:
             text = text + '\n' + url
         parameters = {
-            u'chat_id': settings.chat_id,
-            u'text': text,
+            'chat_id': settings.chat_id,
+            'text': text,
         }
 
         request = requests.post(api_url, data=parameters)

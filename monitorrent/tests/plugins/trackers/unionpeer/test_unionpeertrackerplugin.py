@@ -28,9 +28,9 @@ class UnionpeerTrackerPluginTest(TestCase):
 
     @use_vcr
     def test_parse_url(self):
-        name = u'Звёздные Войны: Войны Клонов (Сезон 4, DVD) / Star Wars: The Clone Wars / Сезон: 4 / ' \
-               u'Серии: 8 из 22 (Дэйв Филони | Dave Filoni) [2011, Анимация, фантасткика, боевик, DVD5 (Custom)] Dub ' \
-               u'+ Rus Sub'
+        name = 'Звёздные Войны: Войны Клонов (Сезон 4, DVD) / Star Wars: The Clone Wars / Сезон: 4 / ' \
+               'Серии: 8 из 22 (Дэйв Филони | Dave Filoni) [2011, Анимация, фантасткика, боевик, DVD5 (Custom)] Dub ' \
+               '+ Rus Sub'
         for url in self.urls_to_check:
             result = self.plugin.parse_url(url)
             self.assertEqual(result["original_name"], name)

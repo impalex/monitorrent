@@ -10,11 +10,11 @@ from monitorrent.tests import DbTestCase
 
 
 class EmailHelper(object):
-    fake_host = u'this_is_fake'
+    fake_host = 'this_is_fake'
     fake_port = 443
     fake_login = None
     fake_password = None
-    fake_to_addr = u'this_is_fake@fake.com'
+    fake_to_addr = 'this_is_fake@fake.com'
     fake_connection_security = False
 
     real_host = None

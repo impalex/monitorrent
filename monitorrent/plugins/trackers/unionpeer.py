@@ -69,9 +69,9 @@ def upgrade_0_to_1(operations_factory):
 class UnionpeerOrgTracker(object):
     tracker_settings = None
     tracker_domain = 'unionpeer.org'
-    _regex = re.compile(u'^/topic/(\d+)(-.*)?$')
-    title_header_start = u'скачать '
-    title_header_end = u" через torrent"
+    _regex = re.compile('^/topic/(\d+)(-.*)?$')
+    title_header_start = 'скачать '
+    title_header_end = " через torrent"
 
     def can_parse_url(self, url):
         parsed_url = urlparse(url)

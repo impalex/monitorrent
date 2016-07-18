@@ -48,8 +48,8 @@ class FreeTorrentsOrgTracker(object):
     tracker_settings = None
     login_url = "http://login.free-torrents.org/forum/login.php"
     profile_page = "http://free-torrents.org/forum/profile.php?mode=viewprofile&u={}"
-    _regex = re.compile(u'^http://w*\.*free-torrents?.org/forum/viewtopic\d?.php\?t=(\d+)(/.*)?$')
-    uid_regex = re.compile(u'.*;i:(\d*).*')
+    _regex = re.compile('^http://w*\.*free-torrents?.org/forum/viewtopic\d?.php\?t=(\d+)(/.*)?$')
+    uid_regex = re.compile('.*;i:(\d*).*')
 
     def __init__(self, uid=None, bbe_data=None):
         self.uid = uid
@@ -81,7 +81,7 @@ class FreeTorrentsOrgTracker(object):
 
     def login(self, username, password):
         s = Session()
-        data = {"login_username": username, "login_password": password, 'login': u'%E2%F5%EE%E4'}
+        data = {"login_username": username, "login_password": password, 'login': '%E2%F5%EE%E4'}
         login_result = s.post(self.login_url, data, headers={'Content-Type': 'application/x-www-form-urlencoded'},
                               timeout=self.tracker_settings.requests_timeout)
         if login_result.url.startswith(self.login_url):

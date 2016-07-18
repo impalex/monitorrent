@@ -34,17 +34,17 @@ class RutrackerTrackerTest(TestCase):
     def test_parse_url(self):
         parsed_url = self.tracker.parse_url("http://rutracker.org/forum/viewtopic.php?t=5062041")
         self.assertEqual(
-            parsed_url['original_name'], u'Бeзyмный Мaкс: Дoрoга яpоcти в 3Д / Mаd Mаx: Furу Rоad 3D '
-                                         u'(Джoрдж Миллер / Geоrge Millеr) [2015, Боевик, Фантастика, '
-                                         u'Приключения, BDrip-AVC] Half OverUnder / Вертикальная анаморфная стереопара')
+            parsed_url['original_name'], 'Бeзyмный Мaкс: Дoрoга яpоcти в 3Д / Mаd Mаx: Furу Rоad 3D '
+                                         '(Джoрдж Миллер / Geоrge Millеr) [2015, Боевик, Фантастика, '
+                                         'Приключения, BDrip-AVC] Half OverUnder / Вертикальная анаморфная стереопара')
 
     @use_vcr
     def test_parse_url_1(self):
         parsed_url = self.tracker.parse_url("http://rutracker.org/forum/viewtopic.php?t=5018611")
         self.assertEqual(parsed_url['original_name'],
-                         u'Ганнибал / Hannibal / Сезон: 3 / Серии: 1-11 из 13 '
-                         u'(Гильермо Наварро, Майкл Раймер, Дэвид Слэйд) [2015, детектив, криминал, драма, HDTVRip] '
-                         u'MVO (Sony Sci Fi) + Original + Subs (Rus, Eng)')
+                         'Ганнибал / Hannibal / Сезон: 3 / Серии: 1-11 из 13 '
+                         '(Гильермо Наварро, Майкл Раймер, Дэвид Слэйд) [2015, детектив, криминал, драма, HDTVRip] '
+                         'MVO (Sony Sci Fi) + Original + Subs (Rus, Eng)')
 
     @use_vcr
     def test_parse_wrong_url(self):

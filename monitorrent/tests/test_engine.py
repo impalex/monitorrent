@@ -467,8 +467,8 @@ class TestDbLoggerWrapper(DbTestCase):
         db_logger = DbLoggerWrapper(inner_logger, ExecuteLogManager())
 
         finish_time = datetime.now(pytz.utc)
-        message1 = u'Message 1'
-        message2 = u'Message 2'
+        message1 = 'Message 1'
+        message2 = 'Message 2'
 
         db_logger.started(finish_time)
         downloaded_time = datetime.now(pytz.utc)
@@ -516,8 +516,8 @@ class TestDbLoggerWrapper(DbTestCase):
         db_logger = DbLoggerWrapper(inner_logger, ExecuteLogManager())
 
         finish_time = datetime.now(pytz.utc)
-        message1 = u'Failed 1'
-        message2 = u'Failed 2'
+        message1 = 'Failed 1'
+        message2 = 'Failed 2'
 
         db_logger.started(finish_time)
         downloaded_time = datetime.now(pytz.utc)
@@ -565,8 +565,8 @@ class TestDbLoggerWrapper(DbTestCase):
         db_logger = DbLoggerWrapper(inner_logger, ExecuteLogManager())
 
         finish_time = datetime.now(pytz.utc)
-        message1 = u'Downloaded 1'
-        message2 = u'Downloaded 2'
+        message1 = 'Downloaded 1'
+        message2 = 'Downloaded 2'
 
         db_logger.started(finish_time)
         downloaded_time = datetime.now(pytz.utc)
@@ -614,9 +614,9 @@ class TestDbLoggerWrapper(DbTestCase):
         db_logger = DbLoggerWrapper(inner_logger, ExecuteLogManager())
 
         finish_time = datetime.now(pytz.utc)
-        message1 = u'Inf 1'
-        message2 = u'Downloaded 1'
-        message3 = u'Failed 1'
+        message1 = 'Inf 1'
+        message2 = 'Downloaded 1'
+        message3 = 'Failed 1'
 
         db_logger.started(finish_time)
         entry_time = datetime.now(pytz.utc)
@@ -670,10 +670,10 @@ class TestDbLoggerWrapper(DbTestCase):
 
         finish_time_1 = datetime.now(pytz.utc)
         finish_time_2 = finish_time_1 + timedelta(seconds=10)
-        message1 = u'Inf 1'
-        message2 = u'Downloaded 1'
-        message3 = u'Failed 1'
-        message4 = u'Failed 2'
+        message1 = 'Inf 1'
+        message2 = 'Downloaded 1'
+        message3 = 'Failed 1'
+        message4 = 'Failed 2'
 
         exception = Exception('Some exception message')
 
@@ -749,7 +749,7 @@ class TestDbLoggerWrapper(DbTestCase):
         finish_time_1 = datetime.now(pytz.utc)
 
         db_logger.started(finish_time_1)
-        db_logger.info(u"Message 1")
+        db_logger.info("Message 1")
         db_logger.finished(finish_time_1, None)
 
         inner_logger.started.assert_called_once_with(finish_time_1)
@@ -767,12 +767,12 @@ class ExecuteLogManagerTest(DbTestCase):
         log_manager = ExecuteLogManager()
 
         log_manager.started(datetime.now(pytz.utc))
-        log_manager.log_entry(u'Message 1', 'info')
-        log_manager.log_entry(u'Message 2', 'downloaded')
-        log_manager.log_entry(u'Message 3', 'downloaded')
-        log_manager.log_entry(u'Message 4', 'failed')
-        log_manager.log_entry(u'Message 5', 'failed')
-        log_manager.log_entry(u'Message 6', 'failed')
+        log_manager.log_entry('Message 1', 'info')
+        log_manager.log_entry('Message 2', 'downloaded')
+        log_manager.log_entry('Message 3', 'downloaded')
+        log_manager.log_entry('Message 4', 'failed')
+        log_manager.log_entry('Message 5', 'failed')
+        log_manager.log_entry('Message 6', 'failed')
         log_manager.finished(datetime.now(pytz.utc), None)
 
         entries, count = log_manager.get_log_entries(0, 5)
@@ -793,15 +793,15 @@ class ExecuteLogManagerTest(DbTestCase):
         finish_time_3 = finish_time_2 + timedelta(seconds=10)
 
         log_manager.started(finish_time_1)
-        log_manager.log_entry(u'Message 1', 'info')
+        log_manager.log_entry('Message 1', 'info')
         log_manager.finished(finish_time_1, None)
 
         log_manager.started(finish_time_2)
-        log_manager.log_entry(u'Download 2', 'downloaded')
+        log_manager.log_entry('Download 2', 'downloaded')
         log_manager.finished(finish_time_2, None)
 
         log_manager.started(finish_time_3)
-        log_manager.log_entry(u'Failed 3', 'failed')
+        log_manager.log_entry('Failed 3', 'failed')
         log_manager.finished(finish_time_3, None)
 
         entries, count = log_manager.get_log_entries(0, 1)
@@ -834,9 +834,9 @@ class ExecuteLogManagerTest(DbTestCase):
     def test_log_entries_details(self):
         log_manager = ExecuteLogManager()
 
-        message1 = u'Message 1'
-        message2 = u'Downloaded 1'
-        message3 = u'Failed 1'
+        message1 = 'Message 1'
+        message2 = 'Downloaded 1'
+        message3 = 'Failed 1'
         finish_time_1 = datetime.now(pytz.utc)
 
         log_manager.started(finish_time_1)
@@ -859,9 +859,9 @@ class ExecuteLogManagerTest(DbTestCase):
     def test_log_entries_details_after(self):
         log_manager = ExecuteLogManager()
 
-        message1 = u'Message 1'
-        message2 = u'Downloaded 1'
-        message3 = u'Failed 1'
+        message1 = 'Message 1'
+        message2 = 'Downloaded 1'
+        message3 = 'Failed 1'
         finish_time_1 = datetime.now(pytz.utc)
 
         log_manager.started(finish_time_1)
@@ -890,12 +890,12 @@ class ExecuteLogManagerTest(DbTestCase):
     def test_log_entries_details_multiple_execute(self):
         log_manager = ExecuteLogManager()
 
-        message11 = u'Message 1'
-        message12 = u'Downloaded 1'
-        message13 = u'Failed 1'
-        message21 = u'Failed 2'
-        message22 = u'Downloaded 2'
-        message23 = u'Message 2'
+        message11 = 'Message 1'
+        message12 = 'Downloaded 1'
+        message13 = 'Failed 1'
+        message21 = 'Failed 2'
+        message22 = 'Downloaded 2'
+        message23 = 'Message 2'
         finish_time_1 = datetime.now(pytz.utc)
         finish_time_2 = datetime.now(pytz.utc) + timedelta(minutes=60)
 
@@ -955,9 +955,9 @@ class ExecuteLogManagerTest(DbTestCase):
     def test_is_running(self):
         log_manager = ExecuteLogManager()
 
-        message11 = u'Message 1'
-        message12 = u'Downloaded 1'
-        message13 = u'Failed 1'
+        message11 = 'Message 1'
+        message12 = 'Downloaded 1'
+        message13 = 'Failed 1'
         finish_time_1 = datetime.now(pytz.utc)
 
         self.assertFalse(log_manager.is_running())
@@ -993,9 +993,9 @@ class ExecuteLogManagerTest(DbTestCase):
     def test_get_current_execute_log_details(self):
         log_manager = ExecuteLogManager()
 
-        message11 = u'Message 1'
-        message12 = u'Downloaded 1'
-        message13 = u'Failed 1'
+        message11 = 'Message 1'
+        message12 = 'Downloaded 1'
+        message13 = 'Failed 1'
         finish_time_1 = datetime.now(pytz.utc)
 
         self.assertIsNone(log_manager.get_current_execute_log_details())
@@ -1026,7 +1026,7 @@ class ExecuteLogManagerTest(DbTestCase):
         log_manager = ExecuteLogManager()
         now = datetime.now(pytz.utc)
 
-        message11 = u'Message 1'
+        message11 = 'Message 1'
 
         start1 = now - timedelta(days=13)
         log_manager.started(start1)
@@ -1081,7 +1081,7 @@ class ExecuteLogManagerTest(DbTestCase):
         log_manager = ExecuteLogManager()
         now = datetime.now(pytz.utc)
 
-        message11 = u'Message 1'
+        message11 = 'Message 1'
 
         start1 = now - timedelta(days=9)
         log_manager.started(start1)

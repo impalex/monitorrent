@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from builtins import str
 from datetime import datetime, timedelta
 import pytz
+import types
 from requests import Response
 from sqlalchemy import Column, Integer, String, ForeignKey
 from ddt import ddt, data, unpack
@@ -563,7 +564,7 @@ class TrackerPluginMixinTest(TestCase):
 
     def test_base_mixin_right_inheritance(self):
         empty_lambda = lambda *a, **d: None
-        plugin_type = type('MockTrackerPlugin2', (TrackerPluginMixinBase, TrackerPluginBase),
+        plugin_type = type(b'MockTrackerPlugin2', (TrackerPluginMixinBase, TrackerPluginBase),
                            {
                                '_prepare_request': empty_lambda,
                                'parse_url': empty_lambda,
@@ -573,7 +574,7 @@ class TrackerPluginMixinTest(TestCase):
         plugin_type()
 
     def test_base_mixin_wrong_inheritance(self):
-        plugin_type = type('MockTrackerPlugin2', (TrackerPluginMixinBase, ), {})
+        plugin_type = type(b'MockTrackerPlugin2', (TrackerPluginMixinBase, ), {})
         with self.assertRaises(Exception) as e:
             plugin_type()
         self.assertEqual(str(e.exception),
@@ -581,7 +582,7 @@ class TrackerPluginMixinTest(TestCase):
 
     def test_execute_mixin_right_inheritance(self):
         empty_lambda = lambda *a, **d: None
-        plugin_type = type('MockTrackerPlugin2', (ExecuteWithHashChangeMixin, TrackerPluginBase),
+        plugin_type = type(b'MockTrackerPlugin2', (ExecuteWithHashChangeMixin, TrackerPluginBase),
                            {
                                '_prepare_request': empty_lambda,
                                'parse_url': empty_lambda,
@@ -592,7 +593,7 @@ class TrackerPluginMixinTest(TestCase):
 
     def test_execute_mixin_wrong_inheritance(self):
         empty_lambda = lambda *a, **d: None
-        plugin_type = type('MockTrackerPlugin2', (ExecuteWithHashChangeMixin, TrackerPluginBase),
+        plugin_type = type(b'MockTrackerPlugin2', (ExecuteWithHashChangeMixin, TrackerPluginBase),
                            {
                                '_prepare_request': empty_lambda,
                                'parse_url': empty_lambda,
@@ -624,7 +625,7 @@ class WithCredentialsMixinTest(DbTestCase):
         password = Column(String, primary_key=True)
 
     empty_lambda = lambda *a, **d: None
-    plugin_type = type('MockPlugin2', (WithCredentialsMixin, TrackerPluginBase),
+    plugin_type = type(b'MockPlugin2', (WithCredentialsMixin, TrackerPluginBase),
                        {
                            '_prepare_request': empty_lambda,
                            'parse_url': empty_lambda,
@@ -649,7 +650,7 @@ class WithCredentialsMixinTest(DbTestCase):
           {'verify_result': False, 'login_result': LoginResult.CredentialsNotSpecified, 'expected': False},
           {'verify_result': False, 'login_result': LoginResult.IncorrentLoginPassword, 'expected': False},)
     def test_execute_login(self, verify_result, login_result, expected):
-        plugin_type2 = type('MockPlugin3', (self.plugin_type, ),
+        plugin_type2 = type(b'MockPlugin3', (self.plugin_type, ),
                             {
                                 'verify': lambda s: verify_result,
                                 'login': lambda s: login_result,
@@ -662,11 +663,11 @@ class WithCredentialsMixinTest(DbTestCase):
     @data(True, False)
     def test_execute(self, value):
         execute_mock = Mock()
-        plugin_type2 = type('ExecuteMixin', (TrackerPluginMixinBase, ),
+        plugin_type2 = type(b'ExecuteMixin', (TrackerPluginMixinBase, ),
                             {
                                 'execute': execute_mock,
                             })
-        plugin_type3 = type('MockPlugin4', (WithCredentialsMixin, plugin_type2, TrackerPluginBase, ),
+        plugin_type3 = type(b'MockPlugin4', (WithCredentialsMixin, plugin_type2, TrackerPluginBase, ),
                             {
                                 '_prepare_request': self.empty_lambda,
                                 'parse_url': self.empty_lambda,

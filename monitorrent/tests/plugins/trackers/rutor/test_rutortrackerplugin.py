@@ -23,7 +23,7 @@ class RutorTrackerPluginTest(DbTestCase):
     def test_parse_url(self):
         plugin = RutorOrgPlugin()
         plugin.init(self.tracker_settings)
-        original_name = u'Время приключений с Финном и Джейком / Adventure Time with Finn & Jake [S01-06] (2010-2015) WEB-DL 720p | Cartoon Network, Зебуро'
+        original_name = 'Время приключений с Финном и Джейком / Adventure Time with Finn & Jake [S01-06] (2010-2015) WEB-DL 720p | Cartoon Network, Зебуро'
         urls = ['http://rutor.info/torrent/466037',
                 'http://www.rutor.info/torrent/466037']
         for url in urls:

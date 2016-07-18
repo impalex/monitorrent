@@ -130,15 +130,15 @@ class LostFilmTVLoginFailedException(Exception):
 
 class LostFilmTVTracker(object):
     tracker_settings = None
-    _regex = re.compile(u'http://www\.lostfilm\.tv/browse\.php\?cat=(?P<cat>\d+)')
-    search_usess_re = re.compile(u'\(usess=([a-f0-9]{32})\)', re.IGNORECASE)
-    _rss_title = re.compile(u'(?P<name>[^(]+)\s+\((?P<original_name>[^(]+)\)\.\s+' +
-                            u'(?P<title>[^([]+)(\s+\((?P<original_title>[^(]+)\))?' +
-                            u'(\s+\[(?P<quality>[^\]]+)\])?\.\s+' +
-                            u'\((?P<episode_info>[^)]+)\)')
-    _season_info = re.compile(u'S(?P<season>\d{2})(E(?P<episode>\d{2}))+')
-    _season_title_info = re.compile(u'^(?P<season>\d+)(\.(?P<season_fraction>\d+))?\s+сезон'
-                                    u'(\s+((\d+)-)?(?P<episode>\d+)\s+серия)?$')
+    _regex = re.compile('http://www\.lostfilm\.tv/browse\.php\?cat=(?P<cat>\d+)')
+    search_usess_re = re.compile('\(usess=([a-f0-9]{32})\)', re.IGNORECASE)
+    _rss_title = re.compile('(?P<name>[^(]+)\s+\((?P<original_name>[^(]+)\)\.\s+' +
+                            '(?P<title>[^([]+)(\s+\((?P<original_title>[^(]+)\))?' +
+                            '(\s+\[(?P<quality>[^\]]+)\])?\.\s+' +
+                            '\((?P<episode_info>[^)]+)\)')
+    _season_info = re.compile('S(?P<season>\d{2})(E(?P<episode>\d{2}))+')
+    _season_title_info = re.compile('^(?P<season>\d+)(\.(?P<season_fraction>\d+))?\s+сезон'
+                                    '(\s+((\d+)-)?(?P<episode>\d+)\s+серия)?$')
     _headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) " + '
                       '"Chrome/48.0.2564.109 Safari/537.36',
@@ -529,11 +529,11 @@ class LostFilmPlugin(WithCredentialsMixin, TrackerPluginBase):
                     self.save_topic(topic, None, status)
 
                 if status != Status.Ok:
-                    engine.log.failed(u"Torrent status changed: {}".format(status))
+                    engine.log.failed("Torrent status changed: {}".format(status))
                     continue
 
                 if episodes is None or len(episodes) == 0:
-                    engine.log.info(u"Series <b>{0}</b> not changed".format(display_name))
+                    engine.log.info("Series <b>{0}</b> not changed".format(display_name))
                     continue
 
                 for episode in episodes:
@@ -541,7 +541,7 @@ class LostFilmPlugin(WithCredentialsMixin, TrackerPluginBase):
                     download_info = episode['download_info']
 
                     if download_info is None:
-                        engine.log.failed(u'Failed get quality "{0}" for series: {1}'
+                        engine.log.failed('Failed get quality "{0}" for series: {1}'
                                           .format(topic.quality, cgi.escape(display_name)))
                         # Should fail to get quality be treated as NotFound?
                         self.save_topic(topic, None, Status.Error)
@@ -553,7 +553,7 @@ class LostFilmPlugin(WithCredentialsMixin, TrackerPluginBase):
                         if response.status_code != 200:
                             raise Exception("Can't download url. Status: {}".format(response.status_code))
                     except Exception as e:
-                        engine.log.failed(u"Failed to download from <b>{0}</b>.\nReason: {1}"
+                        engine.log.failed("Failed to download from <b>{0}</b>.\nReason: {1}"
                                           .format(download_info['download_url'], cgi.escape(str(e))))
                         self.save_topic(topic, None, Status.Error)
                         continue
@@ -561,7 +561,7 @@ class LostFilmPlugin(WithCredentialsMixin, TrackerPluginBase):
                         filename = display_name
                     torrent_content = response.content
                     torrent = Torrent(torrent_content)
-                    engine.log.downloaded(u'Download new series: {0} ({1}, {2})'
+                    engine.log.downloaded('Download new series: {0} ({1}, {2})'
                                           .format(display_name, info[0], info[1]),
                                           torrent_content)
                     topic.season = info[0]
@@ -570,7 +570,7 @@ class LostFilmPlugin(WithCredentialsMixin, TrackerPluginBase):
                     self.save_topic(topic, last_update, Status.Ok)
 
             except Exception as e:
-                engine.log.failed(u"Failed update <b>lostfilm</b> series: {0}.\nReason: {1}"
+                engine.log.failed("Failed update <b>lostfilm</b> series: {0}.\nReason: {1}"
                                   .format(topic.search_name, cgi.escape(str(e))))
 
     def get_topic_info(self, topic):
@@ -623,7 +623,7 @@ class LostFilmPlugin(WithCredentialsMixin, TrackerPluginBase):
 
     def _get_display_name(self, parsed_url):
         if 'name' in parsed_url:
-            return u"{0} / {1}".format(parsed_url['name'], parsed_url['original_name'])
+            return "{0} / {1}".format(parsed_url['name'], parsed_url['original_name'])
         return parsed_url['original_name']
 
     def _set_topic_params(self, url, parsed_url, topic, params):

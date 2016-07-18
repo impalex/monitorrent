@@ -35,12 +35,12 @@ class FreeTorrentsPluginTest(DbTestCase):
     def test_parse_url(self):
         parsed_url = self.plugin.parse_url("http://free-torrents.org/forum/viewtopic.php?t=207456")
         self.assertEqual(
-            parsed_url['original_name'], u'Мистер Робот / Mr. Robot [Сезон 1 (1-9 из 10)]'
-                                         u'[2015, Драма, криминал, WEB-DLRip] [MVO (LostFilm)]')
+            parsed_url['original_name'], 'Мистер Робот / Mr. Robot [Сезон 1 (1-9 из 10)]'
+                                         '[2015, Драма, криминал, WEB-DLRip] [MVO (LostFilm)]')
 
     @use_vcr
     def test_parse_not_found_url(self):
-        parsed_url = self.plugin.parse_url(u'http://free-torrent.org/forum/viewtopic.php?t=312015')
+        parsed_url = self.plugin.parse_url('http://free-torrent.org/forum/viewtopic.php?t=312015')
         self.assertIsNone(parsed_url)
 
     @use_vcr

@@ -48,9 +48,9 @@ class TapochekNetTracker(object):
     tracker_settings = None
     login_url = "http://tapochek.net/login.php"
     profile_page = "http://tapochek.net/profile.php?mode=viewprofile&u={}"
-    _regex = re.compile(u'^http://w*\.*tapochek.net/viewtopic.php\?t=(\d+)(/.*)?$')
-    uid_regex = re.compile(u'.*;i:(\d*).*')
-    title_header = u':: tapochek.net'
+    _regex = re.compile('^http://w*\.*tapochek.net/viewtopic.php\?t=(\d+)(/.*)?$')
+    uid_regex = re.compile('.*;i:(\d*).*')
+    title_header = ':: tapochek.net'
 
     def __init__(self, uid=None, bb_data=None):
         self.uid = uid
@@ -87,7 +87,7 @@ class TapochekNetTracker(object):
 
     def login(self, username, password):
         s = Session()
-        data = {"login_username": username, "login_password": password, 'login': u'Âõîä'.encode("cp1252")}
+        data = {"login_username": username, "login_password": password, 'login': 'Âõîä'.encode("cp1252")}
         login_result = s.post(self.login_url, data, timeout=self.tracker_settings.requests_timeout)
         if login_result.url.startswith(self.login_url):
             # TODO get error info (although it shouldn't contain anything useful

@@ -52,7 +52,7 @@ class LostFilmTrackerHelper(object):
     def login(cls, username, password):
         login_url = "https://login1.bogi.ru/login.php?referer=https%3A%2F%2Fwww.lostfilm.tv%2F"
         profile_url = 'http://www.lostfilm.tv/my.php'
-        search_usess_re = re.compile(u'\(usess=([a-f0-9]{32})\)', re.IGNORECASE)
+        search_usess_re = re.compile('\(usess=([a-f0-9]{32})\)', re.IGNORECASE)
 
         cls_params = {'login': username, 'password': password}
 
@@ -103,7 +103,7 @@ class LostFilmTrackerHelper(object):
         if 'Cookie' in request.headers:
             cookie_string = request.headers['Cookie']
             cookie = http.cookies.SimpleCookie()
-            cookie.load(str(cookie_string))
+            cookie.load(cookie_string.encode('utf-8'))
             cookies = [c.output(header='').strip() for c in list(cookie.values())]
             request.headers['Cookie'] = "; ".join(self._filter_cookies(cookies, hashes))
 
@@ -216,7 +216,7 @@ class LostFilmTrackerHelper(object):
         def repl(match):
             return match.group(0)[0:-50] + '-' * 50
 
-        return re.sub(u'http://tracktor.in/td.php\?s=([a-zA-Z0-9]|(%[0-9A-F]{2}))+',
+        return re.sub('http://tracktor.in/td.php\?s=([a-zA-Z0-9]|(%[0-9A-F]{2}))+',
                       repl,
                       value)
 

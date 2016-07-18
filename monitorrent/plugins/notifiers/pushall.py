@@ -51,12 +51,12 @@ class PushAllNotifierPlugin(NotifierPlugin):
         if not settings or not settings.access_token or not settings.user_id:
             raise PushAllException(1, "Access Token or User Id was not specified")
         parameters = {
-            u'type': 'self',
-            u'title': header,
-            u'text': body,
-            u'url': url,
-            u'id': settings.user_id,
-            u'key': settings.access_token
+            'type': 'self',
+            'title': header,
+            'text': body,
+            'url': url,
+            'id': settings.user_id,
+            'key': settings.access_token
         }
 
         request = requests.post('https://pushall.ru/api.php', data=parameters)
