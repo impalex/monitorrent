@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 from mock import patch
 from monitorrent.plugins.trackers import LoginResult, TrackerSettings
 from monitorrent.plugins.trackers.rutracker import RutrackerPlugin, RutrackerLoginFailedException, RutrackerTopic

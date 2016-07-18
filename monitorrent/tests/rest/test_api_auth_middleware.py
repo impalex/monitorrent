@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import falcon
 from falcon.testing import TestResource
 from monitorrent.tests import RestTestBase

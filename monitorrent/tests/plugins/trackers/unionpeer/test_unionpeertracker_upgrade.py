@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from monitorrent.plugins.trackers.unionpeer import upgrade, get_current_version
 from sqlalchemy import Column, Integer, String, MetaData, Table, ForeignKey
 from monitorrent.tests import UpgradeTestCase

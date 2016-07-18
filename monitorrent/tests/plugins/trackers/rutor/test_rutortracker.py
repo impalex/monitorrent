@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 from monitorrent.plugins.trackers import TrackerSettings
 from monitorrent.plugins.trackers.rutor import RutorOrgTracker
 from unittest import TestCase

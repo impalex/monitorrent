@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from mock import Mock
 from sqlalchemy import MetaData, Table, Column, String, Integer
 from monitorrent.db import DBSession, MigrationContext, MonitorrentOperations, UTCDateTime

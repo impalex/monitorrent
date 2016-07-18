@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from ddt import ddt, data
 from monitorrent.tests import DbTestCase
 from monitorrent.settings_manager import SettingsManager

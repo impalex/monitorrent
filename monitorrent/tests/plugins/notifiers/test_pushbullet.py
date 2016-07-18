@@ -1,8 +1,10 @@
+from __future__ import unicode_literals
+from builtins import object
 from monitorrent.plugins.notifiers.pushbullet import PushbulletNotifierPlugin, PushbulletSettings, PushbulletException
 from monitorrent.tests import use_vcr, DbTestCase
 
 
-class PushbulletHelper:
+class PushbulletHelper(object):
     fake_token = 'this_is_fake'
     real_token = None
 

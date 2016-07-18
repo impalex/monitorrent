@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import os
 from mock import Mock, MagicMock, patch
 from monitorrent.tests import TestCase

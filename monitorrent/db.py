@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from __future__ import unicode_literals
 from builtins import range
 from sqlalchemy import create_engine, event, Column, String, Integer, Table, types
 import sqlalchemy.orm

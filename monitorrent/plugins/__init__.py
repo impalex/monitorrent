@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from enum import Enum
 from monitorrent.db import Base, UTCDateTime
 from monitorrent.upgrade_manager import add_upgrade

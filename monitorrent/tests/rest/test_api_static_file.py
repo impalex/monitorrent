@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+from builtins import next
 from builtins import str
 # coding=utf-8
 from email.utils import formatdate

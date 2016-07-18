@@ -1,8 +1,11 @@
+from __future__ import unicode_literals
+from builtins import object
 # coding=utf-8
 import inspect
 from abc import ABCMeta, abstractproperty, abstractmethod
 from sqlalchemy import String, Column, Integer, Boolean
 from monitorrent.db import DBSession, dict2row, row2dict, Base
+from future.utils import with_metaclass
 
 
 class NotifierPolymorphicMap(dict):
@@ -42,15 +45,13 @@ class NotificationException(Exception):
         self.message = message
 
 
-class NotifierPlugin:
+class NotifierPlugin(with_metaclass(ABCMeta, object)):
     def __init__(self):
         """
         pass
         """
 
     settings_fields = ['access_token', 'user_id']
-
-    __metaclass__ = ABCMeta
 
     @abstractproperty
     def settings_class(self):

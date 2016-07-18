@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from future import standard_library
 standard_library.install_aliases()
 from builtins import object
@@ -117,8 +118,7 @@ class NnmClubTracker(object):
         page = requests.get(url, cookies=cookies, timeout=self.tracker_settings.requests_timeout)
         page_soup = get_soup(page.text, 'html5lib' if sys.platform == 'win32' else None)
         anchors = page_soup.find_all("a")
-        da = list(filter(lambda tag: tag.has_attr('href') and tag.attrs['href'].startswith("download.php?id="),
-                         anchors))
+        da = list([tag for tag in anchors if tag.has_attr('href') and tag.attrs['href'].startswith("download.php?id=")])
         # not a free torrent
         if len(da) == 0:
             return None

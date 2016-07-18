@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 from requests import Response
 from monitorrent.plugins import Status
 from monitorrent.plugins.trackers import TrackerSettings

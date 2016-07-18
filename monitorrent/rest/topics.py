@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+import six
 from builtins import str
 from builtins import object
 import falcon
@@ -36,7 +38,7 @@ class TopicParse(object):
         self.tracker_manager = tracker_manager
 
     def on_get(self, req, resp):
-        url = req.get_param('url', required=True)
+        url = six.text_type(req.get_param(u'url', required=True))
         title = self.tracker_manager.prepare_add_topic(url)
         if not title:
             raise falcon.HTTPBadRequest('CantParse', 'Can\'t parse url: \'{}\''.format(url))

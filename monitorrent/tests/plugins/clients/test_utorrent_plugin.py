@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from ddt import ddt
 from mock import patch, Mock, MagicMock
 from requests import Response

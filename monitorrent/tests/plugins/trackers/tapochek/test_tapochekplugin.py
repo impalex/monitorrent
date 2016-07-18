@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 from monitorrent.plugins.trackers import LoginResult, TrackerSettings
 from monitorrent.plugins.trackers.tapochek import TapochekNetPlugin, TapochekLoginFailedException, TapochekNetTopic
 from monitorrent.tests import use_vcr, DbTestCase

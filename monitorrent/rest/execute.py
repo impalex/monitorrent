@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from builtins import object
 import time
 import falcon
@@ -44,7 +45,7 @@ class ExecuteCall(object):
         if len(params) > 1:
             raise falcon.HTTPBadRequest("wrong params count",
                                         'Only one of params are supported: ids, statuses or tracker, ' +
-                                        'but {0} was provided'.format(', '.join(params.keys())))
+                                        'but {0} was provided'.format(', '.join(list(params.keys()))))
         if 'ids' in params:
             ids = params['ids']
         elif 'statuses' in params:

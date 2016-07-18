@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from mock import Mock, patch, call
 from sqlalchemy import Column, String, Integer, Table, MetaData
 from monitorrent.db import DBSession

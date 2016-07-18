@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from builtins import str
 from datetime import datetime, timedelta
 import pytz
@@ -530,7 +531,7 @@ class TrackerPluginBaseTest(DbTestCase):
         # get all topics
         # by default we rerun execute only for Ok and Error topics
         # all other statuses will be skipped
-        ok_and_error_topics = list(filter(lambda topic: topic['status'] in [Status.Ok, Status.Error], all_topics))
+        ok_and_error_topics = list([topic for topic in all_topics if topic['status'] in [Status.Ok, Status.Error]])
         topics = plugin.get_topics(None)
         self.assertEqual(len(topics), len(ok_and_error_topics))
 

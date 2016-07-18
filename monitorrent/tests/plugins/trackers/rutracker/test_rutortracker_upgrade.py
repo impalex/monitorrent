@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import pytz
 from monitorrent.plugins.trackers.rutor import upgrade, get_current_version
 from sqlalchemy import Column, Integer, String, MetaData, Table, ForeignKey

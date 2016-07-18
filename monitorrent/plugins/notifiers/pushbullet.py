@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 import requests
 from sqlalchemy import Column, String, Integer, ForeignKey
 from monitorrent.plugin_managers import register_plugin
