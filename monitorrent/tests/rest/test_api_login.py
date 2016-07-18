@@ -31,7 +31,7 @@ class SettingsAuthenticationTest(RestTestBase):
         self.assertEqual(self.srmock.status, falcon.HTTP_200)
         set_cookie = self.srmock.headers_dict['set-cookie']
         cookie = http.cookies.SimpleCookie()
-        cookie.load(set_cookie.encode('utf-8'))
+        cookie.load(str(set_cookie))
         self.assertEqual(1, len(cookie))
         jwt_morsel = list(cookie.values())[0]
         self.assertEqual(AuthMiddleware.cookie_name, jwt_morsel.key)
@@ -59,12 +59,12 @@ class SettingsAuthenticationTest(RestTestBase):
 
     def test_logout_success(self):
         self.api.add_route(self.test_route, Logout())
-        self.simulate_request(self.test_route, method="POST", headers={'Cookie': self.get_cookie().encode('utf-8')})
+        self.simulate_request(self.test_route, method="POST", headers={'Cookie': str(self.get_cookie())})
 
         self.assertEqual(self.srmock.status, falcon.HTTP_NO_CONTENT)
         set_cookie = self.srmock.headers_dict['set-cookie']
         cookie = http.cookies.SimpleCookie()
-        cookie.load(set_cookie.encode('utf-8'))
+        cookie.load(str(set_cookie))
         self.assertEqual(1, len(cookie))
         jwt_morsel = list(cookie.values())[0]
         self.assertEqual(AuthMiddleware.cookie_name, jwt_morsel.key)
@@ -74,6 +74,6 @@ class SettingsAuthenticationTest(RestTestBase):
 
     def test_logout_unauthorized(self):
         self.api.add_route(self.test_route, Logout())
-        self.simulate_request(self.test_route, method="POST", headers={'Cookie': self.get_cookie(True).encode('utf-8')})
+        self.simulate_request(self.test_route, method="POST", headers={'Cookie': str(self.get_cookie(True))})
 
         self.assertEqual(self.srmock.status, falcon.HTTP_UNAUTHORIZED)

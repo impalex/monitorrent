@@ -16,7 +16,7 @@ class TestAuthMiddleware(RestTestBase):
     def test_auth_success(self):
         self.api.add_route(self.test_route, TestResource())
 
-        self.simulate_request(self.test_route, headers={'Cookie': self.get_cookie().encode('utf-8')})
+        self.simulate_request(self.test_route, headers={'Cookie': str(self.get_cookie())})
         self.assertEqual(falcon.HTTP_OK, self.srmock.status)
 
     def test_no_auth_success(self):
@@ -45,13 +45,13 @@ class TestAuthMiddleware(RestTestBase):
     def test_auth_failed_with_modified_cookie(self):
         self.api.add_route(self.test_route, TestResource())
 
-        self.simulate_request(self.test_route, headers={'Cookie': self.get_cookie(True).encode('utf-8')})
+        self.simulate_request(self.test_route, headers={'Cookie': str(self.get_cookie(True))})
         self.assertEqual(falcon.HTTP_UNAUTHORIZED, self.srmock.status)
 
     def test_auth_failed_with_random_cookie(self):
         self.api.add_route(self.test_route, TestResource())
 
-        self.simulate_request(self.test_route, headers={'Cookie': 'jwt=random; HttpOnly; Path=/'.encode('utf-8')})
+        self.simulate_request(self.test_route, headers={'Cookie': str('jwt=random; HttpOnly; Path=/')})
         self.assertEqual(falcon.HTTP_UNAUTHORIZED, self.srmock.status)
 
     def test_disabled_auth(self):

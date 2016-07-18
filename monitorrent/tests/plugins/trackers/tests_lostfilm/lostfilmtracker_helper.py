@@ -1,12 +1,7 @@
-from __future__ import unicode_literals
-from builtins import str
-import six
-from future import standard_library
-standard_library.install_aliases()
-from builtins import map
-from builtins import filter
-from builtins import object
 # coding=utf-8
+from __future__ import unicode_literals
+import six
+from builtins import map, filter, object
 from io import BytesIO, StringIO
 from vcr.cassette import Cassette
 from requests import Session
@@ -103,7 +98,7 @@ class LostFilmTrackerHelper(object):
         if 'Cookie' in request.headers:
             cookie_string = request.headers['Cookie']
             cookie = http.cookies.SimpleCookie()
-            cookie.load(cookie_string.encode('utf-8'))
+            cookie.load(str(cookie_string))
             cookies = [c.output(header='').strip() for c in list(cookie.values())]
             request.headers['Cookie'] = "; ".join(self._filter_cookies(cookies, hashes))
 

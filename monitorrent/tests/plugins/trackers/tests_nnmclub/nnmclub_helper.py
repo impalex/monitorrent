@@ -1,14 +1,8 @@
-from __future__ import unicode_literals
-from builtins import str
-import six
-from future import standard_library
-
-standard_library.install_aliases()
-from builtins import map
-from builtins import filter
-from builtins import object
 # coding=utf-8
-from io import BytesIO, StringIO
+from __future__ import unicode_literals
+import six
+from builtins import map, filter, object
+from io import BytesIO
 from vcr.cassette import Cassette
 from requests import Session
 import inspect
@@ -16,9 +10,7 @@ import functools
 import re
 import gzip
 import http.cookies
-import urllib.request, urllib.parse, urllib.error
 from monitorrent.tests import use_vcr
-from monitorrent.utils.soup import get_soup
 from urllib.parse import urlparse, unquote, quote
 from phpserialize import loads
 
@@ -77,7 +69,7 @@ class NnmClubTrackerHelper(object):
         if 'Cookie' in request.headers:
             cookie_string = request.headers['Cookie']
             cookie = http.cookies.SimpleCookie()
-            cookie.load(cookie_string.encode('utf-8'))
+            cookie.load(str(cookie_string))
             cookies = [c.output(header='').strip() for c in list(cookie.values())]
             request.headers['Cookie'] = "; ".join(self._filter_cookies(cookies))
 
